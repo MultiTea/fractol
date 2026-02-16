@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/16 15:42:07 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/16 16:40:38 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ LIBS	:= ft ftprintf
 LIBS_TARGET :=	\
 	libs/Libft/libft.a \
 	libs/printf/libftprintf.a
-LIB_MLX := mlx
-LIB_MLX_TARGET := libs/minilibx-linux/libmlx.a
+LIB_MLX := mlx_Linux
+LIB_MLX_TARGET := libs/minilibx-linux/libmlx_Linux.a
 
 #BUILD
 BUILD_DIR 	:= .build
@@ -40,8 +40,8 @@ CC 			:= cc
 CCFLAGS 	:= -Wall -Wextra -Werror
 AR 			:= ar
 ARFLAGS		:= rcs
-LDFLAGS     := $(addprefix -L,$(dir $(LIBS_TARGET)) $(dir $(LIB_MLX_TARGET)))
-LDLIBS      := $(addprefix -l,$(LIBS) $(LIB_MLX))
+LDFLAGS     := $(addprefix -L,$(dir $(LIBS_TARGET)) $(dir $(LIB_MLX_TARGET)) /usr/lib)
+LDLIBS      := $(addprefix -l,$(LIBS) $(LIB_MLX) Xext X11 m z)
 
 #TOOLS
 RM 			:= rm -f
@@ -57,7 +57,7 @@ GREEN 	= \033[0;32m
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS_TARGET) $(LIB_MLX_TARGET)
-	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)[OK]$(DEF) CREATED $(NAME)"
 
 $(LIBS_TARGET):
@@ -68,14 +68,14 @@ $(LIB_MLX_TARGET):
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CCFLAGS) -c $< -o $@
+	@$(CC) $(CCFLAGS) -O3 -c $< -o $@
 	@echo "$(GREEN)[OK]$(DEF) CREATED $@"
 
--include $(DEPS)
+-include $(DEPS) -O3
 
 clean:
 	@for f in $(dir $(LIBS_TARGET)); do $(MAKE) --silent --no-print-directory -C $$f clean; done
-	@$(MAKE) --silent --no-print-directory -j$(MAX_J) -C $(dir $(LIB_MLX_TARGET)) clean
+	@$(MAKE) --silent --no-print-directory -C $(dir $(LIB_MLX_TARGET)) clean
 	@$(RM) $(OBJS) $(DEPS)
 	@rm -rf $(BUILD_DIR)
 	@echo "$(GREEN)[OK]$(DEF) CLEANED $(NAME) objs & deps"
