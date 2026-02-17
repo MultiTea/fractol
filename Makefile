@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/16 16:40:38 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/17 16:09:58 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME		:= fractol
 
 #SOURCES
 SRC_DIR		:= src
-SRCS		:= main.c
+SRCS		:= main.c \
+	controls/controls.c \
+	colors/hsv_to_rgb.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 
 #INCLUDES
@@ -92,9 +94,10 @@ re:
 	@+make --silent --no-print-directory all
 	@echo "$(GREEN)[OK]$(DEF) RECOMPILED $(NAME)"
 
-#debug: fclean
-#	@$(MAKE) --no-print-directory $(OBJS) $(LIBS_TARGET) CCFLAGS="$(CCFLAGS) -g"
-#	@$(CC) $(CCFLAGS) -g $(LDFLAGS) $(OBJS) $(LDLIBS) -o debug
-#	@echo "$(GREEN)[OK]$(DEF) CREATED debug program"
+debug: fclean
+	@$(MAKE) --no-print-directory $(OBJS) $(LIBS_TARGET) CCFLAGS="$(CCFLAGS) -g"
+	@$(MAKE) --no-print-directory $(OBJS) $(LIB_MLX_TARGET) CCFLAGS="$(CCFLAGS) -g"
+	@$(CC) $(CCFLAGS) -g $(LDFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o debug
+	@echo "$(GREEN)[OK]$(DEF) CREATED debug program"
 
 .PHONY: all clean fclean re

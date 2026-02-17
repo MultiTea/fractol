@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/17 13:32:37 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/17 18:30:30 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 typedef struct s_data
 {
+	void	*mlx;
+	void	*win;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -48,6 +50,13 @@ typedef struct s_hsv
 }			t_hsv;
 
 int			hsv_to_rgb(double h, double s, double v);
-int			key_handler(int keycode);
+int			key_handler(int keycode, t_data *img);
+
+# define H 1080
+# define W 1920
+
+/// KEYS MAP
+
+# define ESC 0xFF1B
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb2hsv.c                                          :+:      :+:    :+:   */
+/*   hsv_to_rgb.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:28:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/17 13:29:39 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/17 18:30:27 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ static t_rgb	set_rgb(int r, int g, int b)
 	color.r = r;
 	color.g = g;
 	color.b = b;
-	return (color);
-}
-
-static t_hsv	set_hsv(double h, double s, double v)
-{
-	t_hsv	color;
-
-	color.h = h;
-	color.s = s;
-	color.v = v;
 	return (color);
 }
 

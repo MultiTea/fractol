@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/17 14:01:45 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/17 18:31:02 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,30 @@ void	display_img(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	display_rectangle(t_data *img, int h, int w)
+int	display_rectangle(t_data *img)
 {
-	int	x;
-	int	y;
+	static int	i = 0;
+	int			x;
+	int			y;
+	int			color;
 
 	x = 0;
-	while (x < w)
+	while (x < W)
 	{
 		y = 0;
-		while (y < h)
+		color = hsv_to_rgb(((x + (i * 12)) % W) * 360.0 / W, 1.0, 1.0);
+		while (y < H)
 		{
-			display_img(img, x, y, hsv_to_rgb(((double)x / w) * 360.0, 1.0,
-					1.0));
+			display_img(img, x, y, color);
 			y++;
 		}
 		x++;
 	}
+	i++;
+	if (i == W)
+		i = 0;
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	return (0);
 }
 
 int	main(void)
@@ -44,18 +51,17 @@ int	main(void)
 	void	*mlx;
 	void	*win;
 	t_data	img;
-	int		display[2];
 
 	mlx = mlx_init();
-	mlx_get_screen_size(mlx, &display[0], &display[1]);
-	display[0] /= 2;
-	display[1] /= 2;
-	win = mlx_new_window(mlx, display[0], display[1], "KAKOU KAKOU!");
-	img.img = mlx_new_image(mlx, display[0], display[1]);
+	if (!mlx)
+		return (1);
+	win = mlx_new_window(mlx, W, H, "KAKOU KAKOU!");
+	img.mlx = mlx;
+	img.win = win;
+	img.img = mlx_new_image(mlx, W, H);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	display_rectangle(&img, display[0], display[1]);
-	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	mlx_key_hook(win, key_handler, NULL);
+	mlx_loop_hook(mlx, display_rectangle, &img);
+	mlx_key_hook(img.win, key_handler, &img);
 	mlx_loop(mlx);
 	return (0);
 }
