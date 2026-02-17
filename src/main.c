@@ -6,19 +6,11 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/16 19:51:07 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/17 14:01:45 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
-
-int	key_handler(int keycode, void *param)
-{
-	(void)param;
-	if (keycode == 0xFF1B)
-		exit(0);
-	return (0);
-}
 
 void	display_img(t_data *data, int x, int y, int color)
 {
@@ -28,39 +20,40 @@ void	display_img(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	display_rectangle(t_data *img, int h, int w)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < w)
+	{
+		y = 0;
+		while (y < h)
+		{
+			display_img(img, x, y, hsv_to_rgb(((double)x / w) * 360.0, 1.0,
+					1.0));
+			y++;
+		}
+		x++;
+	}
+}
+
 int	main(void)
 {
 	void	*mlx;
 	void	*win;
 	t_data	img;
-	int		x;
-	int		y;
-	int		color;
-	int		res;
-	int		res_y;
-	int		res_x;
+	int		display[2];
 
-	x = 0;
-	y = 0;
-	res_y = 0;
-	res_x = 0;
-	color = 1;
 	mlx = mlx_init();
-	res = mlx_get_screen_size(mlx, &res_x, &res_y);
-	win = mlx_new_window(mlx, (res_x / 2), (res_y / 2), "KAKOU KAKOU!");
-	img.img = mlx_new_image(mlx, res_x, res_y);
+	mlx_get_screen_size(mlx, &display[0], &display[1]);
+	display[0] /= 2;
+	display[1] /= 2;
+	win = mlx_new_window(mlx, display[0], display[1], "KAKOU KAKOU!");
+	img.img = mlx_new_image(mlx, display[0], display[1]);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	while (x <= res_x)
-	{
-		y = 0;
-		while (y < res_y)
-		{
-			display_img(&img, x, y, color);
-			y++;
-		}
-		x++;
-		color *= 99;
-	}
+	display_rectangle(&img, display[0], display[1]);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_key_hook(win, key_handler, NULL);
 	mlx_loop(mlx);

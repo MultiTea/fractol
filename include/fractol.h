@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/16 16:56:42 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/17 13:32:37 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,22 @@ typedef struct s_data
 	int		line_len;
 	int		endian;
 }			t_data;
+
+typedef struct s_rgb
+{
+	int		r;
+	int		g;
+	int		b;
+}			t_rgb;
+
+typedef struct s_hsv
+{
+	double	h;
+	double	s;
+	double	v;
+}			t_hsv;
+
+int			hsv_to_rgb(double h, double s, double v);
+int			key_handler(int keycode);
 
 #endif
