@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 12:10:19 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 13:03:14 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ typedef enum e_fractal_type
 typedef struct s_fract
 {
 	t_fractal_type	type;
-	int				max_i;
 	double			min_x;
 	double			max_x;
 	double			min_y;
 	double			max_y;
+	double			julia_x;
+	double			julia_y;
+	int				max_i;
 }					t_fract;
 
 typedef struct s_dataset

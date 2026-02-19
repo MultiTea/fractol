@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:41:17 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 11:08:59 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 16:37:59 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	display_pixel(t_mlx_img *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (y < 0 || x < 0 || W < x || H < y)
+		return ;
 	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }

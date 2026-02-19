@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 18:16:05 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 12:23:48 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 17:46:23 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@
  parameter(s).\n"
 # define ERR_MSG_INVALID_NAME "Please enter a correct fractal type.\n"
 
-# define H 1080
-# define W 1920
+# define H 2160
+# define W 3840
 
 # define ARGC_MIN 2
 
 /// KEYS MAP
 
 # define ESC 0xFF1B
+# define ARR_L 0xFF51
+# define ARR_R 0xFF53
+# define ARR_UP 0xFF52
+# define ARR_DOWN 0xFF54
 
 #endif

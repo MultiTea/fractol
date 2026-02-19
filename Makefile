@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/19 10:55:20 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/19 13:09:01 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ SRCS		:= main.c \
 	display/display.c \
 	display/init_display.c \
 	parsing/parsing.c \
-	renders/mandelbrot.c
+	renders/renders_utils.c \
+	renders/mandelbrot.c \
+	renders/julia.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 
 #INCLUDES
