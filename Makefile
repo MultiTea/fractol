@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/19 01:42:43 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/19 10:55:20 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS		:= main.c \
 	colors/hsv_to_rgb.c \
 	display/display.c \
 	display/init_display.c \
-	parsing/parsing.c
+	parsing/parsing.c \
+	renders/mandelbrot.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 
 #INCLUDES

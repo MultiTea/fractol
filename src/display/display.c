@@ -6,13 +6,13 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:41:17 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/18 23:59:35 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 10:14:57 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fractol.h"
 
-void	display_img(t_mlx_img *data, int x, int y, int color)
+void	display_pixel(t_mlx_img *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -34,7 +34,7 @@ int	display_rainbow(t_mlx_data *graphic)
 		color = hsv_to_rgb(((x + (i * 12)) % W) * 360.0 / W, 1.0, 1.0);
 		while (y < H)
 		{
-			display_img(&graphic->frame, x, y, color);
+			display_pixel(&graphic->frame, x, y, color);
 			y++;
 		}
 		x++;
