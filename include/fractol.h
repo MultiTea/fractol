@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 10:57:53 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 11:37:01 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			key_handler(int keycode, t_mlx_data *graphic);
 int			display_rainbow(t_mlx_data *graphic);
 int			close_hook(t_mlx_data *graphic);
 void		display_pixel(t_mlx_img *data, int x, int y, int color);
-int			mandelbrot_set(t_dataset *mdb, t_pixel p);
+int			render_mdb(t_dataset *mdb);
 
 #endif
