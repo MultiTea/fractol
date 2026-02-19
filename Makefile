@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/17 16:09:58 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/19 01:42:43 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,12 @@ NAME		:= fractol
 #SOURCES
 SRC_DIR		:= src
 SRCS		:= main.c \
-	controls/controls.c \
-	colors/hsv_to_rgb.c
+	controls/handlers.c \
+	controls/hooks.c \
+	colors/hsv_to_rgb.c \
+	display/display.c \
+	display/init_display.c \
+	parsing/parsing.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 
 #INCLUDES
@@ -99,5 +103,9 @@ debug: fclean
 	@$(MAKE) --no-print-directory $(OBJS) $(LIB_MLX_TARGET) CCFLAGS="$(CCFLAGS) -g"
 	@$(CC) $(CCFLAGS) -g $(LDFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o debug
 	@echo "$(GREEN)[OK]$(DEF) CREATED debug program"
+
+fdebug : clean
+	@rm -rf debug
+	@echo "$(GREEN)[OK]$(DEF) CLEANED debug"
 
 .PHONY: all clean fclean re

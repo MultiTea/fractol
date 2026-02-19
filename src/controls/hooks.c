@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 13:31:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/17 18:30:20 by lbolea           ###   ########.fr       */
+/*   Created: 2026/02/19 01:21:31 by lbolea            #+#    #+#             */
+/*   Updated: 2026/02/19 01:37:41 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fractol.h"
 
-int	key_handler(int keycode, t_data *img)
+int	close_hook(t_mlx_data *graphic)
 {
-	if (keycode == ESC)
-	{
-		mlx_destroy_image(img->mlx, img->img);
-		mlx_destroy_window(img->mlx, img->win);
-		mlx_destroy_display(img->mlx);
-		free(img->mlx);
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
+	mlx_destroy_image(graphic->mlx, graphic->frame.img);
+	mlx_destroy_window(graphic->mlx, graphic->win);
+	mlx_destroy_display(graphic->mlx);
+	free(graphic->mlx);
+	exit(EXIT_SUCCESS);
 }
