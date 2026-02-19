@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 17:57:15 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 18:27:18 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ double		map(double unscaled_num, double map_min, double map_max,
 int			render_fract(t_dataset *fract);
 void		julia_set(t_dataset *julia, int x, int y);
 void		mandelbrot_set(t_dataset *mdb, int x, int y);
+int			mouse_handler(int button, int x, int y, t_dataset *graphic);
 
 #endif

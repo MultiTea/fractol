@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 17:56:34 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 18:33:20 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(graphic.mlx.mlx, graphic.mlx.win,
 		graphic.mlx.frame.img, 0, 0);
 	mlx_key_hook(graphic.mlx.win, key_handler, &graphic);
+	mlx_mouse_hook(graphic.mlx.win, mouse_handler, &graphic);
 	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
+		&graphic);
+	mlx_hook(graphic.mlx.win, ButtonPress, ButtonPressMask, mouse_handler,
 		&graphic);
 	mlx_loop(graphic.mlx.mlx);
 	return (0);

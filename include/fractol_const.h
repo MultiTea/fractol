@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 18:16:05 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 17:46:23 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/19 18:09:13 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  parameter(s).\n"
 # define ERR_MSG_INVALID_NAME "Please enter a correct fractal type.\n"
 
-# define H 2160
-# define W 3840
+# define H 1080
+# define W 1920
 
 # define ARGC_MIN 2
 
