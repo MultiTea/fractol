@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 18:30:20 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 20:40:37 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv)
 		graphic.fract.type = JULIA;
 	else if (argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 11))
 		graphic.fract.type = MANDELBROT;
+	else if (argc == 2 && !ft_strncmp(argv[1], "multibrot", 10))
+		graphic.fract.type = MULTIBROT;
 	else
 		return (ft_printf("Error"));
 	init_display(&graphic.mlx);

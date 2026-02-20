@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:49:08 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 18:36:51 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 20:41:03 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,25 @@ void	display_pixel(t_mlx_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	display_fract(t_dataset *fract, t_complex z, int x, int y, int i)
-{
-	double	zn;
-	double	nu;
-
-	if (i == fract->fract.max_i)
-		display_pixel(&fract->mlx.frame, x, y, 0xFFFFFF);
-	else
-	{
-		zn = z.x * z.x + z.y * z.y;
-		nu = log2(log2(zn));
-		display_pixel(&fract->mlx.frame, x, y, hsv_to_rgb((i + 1 - nu) * 5, 1,
-				1));
-	}
-}
-
 int	render_fract(t_dataset *fract)
 {
-	int	y;
-	int	x;
+	t_pos	p;
 
-	y = 0;
-	while (y < H)
+	p.y = 0;
+	while (p.y < H)
 	{
-		x = 0;
-		while (x < W)
+		p.x = 0;
+		while (p.x < W)
 		{
 			if (fract->fract.type == MANDELBROT)
-				mandelbrot_set(fract, x, y);
+				mandelbrot_set(fract, p);
 			else if (fract->fract.type == JULIA)
-				julia_set(fract, x, y);
-			x++;
+				julia_set(fract, p);
+			else if (fract->fract.type == MULTIBROT)
+				multibrot_set(fract, p);
+			p.x++;
 		}
-		y++;
+		p.y++;
 	}
 	mlx_put_image_to_window(fract->mlx.mlx, fract->mlx.win,
 		fract->mlx.frame.img, 0, 0);

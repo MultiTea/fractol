@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 17:53:18 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 20:39:06 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum e_fractal_type
 {
 	MANDELBROT,
 	JULIA,
+	MULTIBROT,
 }					t_fractal_type;
 
 typedef struct s_complex
@@ -51,6 +52,12 @@ typedef struct s_complex
 	double			x;
 	double			y;
 }					t_complex;
+
+typedef struct s_pos
+{
+	int				x;
+	int				y;
+}					t_pos;
 
 typedef struct s_fract
 {
