@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:49:08 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 17:06:59 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 17:04:17 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	fract_init(t_dataset *data)
 	data->fract.julia_x = 0.001643721971153;
 	data->fract.julia_y = 0.822467633298876;
 	data->fract.max_i = 100;
+	data->k.up = 0;
+	data->k.down = 0;
+	data->k.right = 0;
+	data->k.left = 0;
 }
 
 void	display_fract(t_dataset *fract, t_complex z, int x, int y, int i)
@@ -32,11 +36,11 @@ void	display_fract(t_dataset *fract, t_complex z, int x, int y, int i)
 	double	nu;
 
 	if (i == fract->fract.max_i)
-		display_pixel(&fract->mlx.frame, x, y, 0x000000);
+		display_pixel(&fract->mlx.frame, x, y, 0xFFFFFF);
 	else
 	{
 		zn = z.x * z.x + z.y * z.y;
-		nu = log(log(zn) / 2.0) / log(2.0);
+		nu = log2(log2(zn));
 		display_pixel(&fract->mlx.frame, x, y, hsv_to_rgb((i + 1 - nu) * 5, 1,
 				1));
 	}

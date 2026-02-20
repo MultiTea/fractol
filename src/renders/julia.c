@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:36:48 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 18:39:34 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 13:01:20 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	julia_set(t_dataset *julia, int x, int y)
 
 	i = 0;
 	z.x = map((double)x, julia->fract.min_x, julia->fract.max_x, (double)W);
-	z.y = map((double)y, julia->fract.max_y, julia->fract.min_y, (double)H);
+	z.y = map((double)y, julia->fract.min_y, julia->fract.max_y, (double)H);
 	c.x = julia->fract.julia_x;
 	c.y = julia->fract.julia_y;
 	while (i < julia->fract.max_i)

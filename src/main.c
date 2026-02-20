@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 18:33:20 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:50:57 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@ int	main(int argc, char **argv)
 		graphic.fract.type = MANDELBROT;
 	else
 		return (ft_printf("Error"));
-	// check_param(argc, argv);
 	init_display(&graphic.mlx);
-	mlx_loop_hook(graphic.mlx.mlx, render_fract, &graphic);
+	render_fract(&graphic);
 	mlx_put_image_to_window(graphic.mlx.mlx, graphic.mlx.win,
 		graphic.mlx.frame.img, 0, 0);
-	mlx_key_hook(graphic.mlx.win, key_handler, &graphic);
-	mlx_mouse_hook(graphic.mlx.win, mouse_handler, &graphic);
-	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
+	mlx_hook(graphic.mlx.win, KeyPress, KeyPressMask, key_pressed, &graphic);
+	mlx_hook(graphic.mlx.win, KeyRelease, KeyReleaseMask, key_released,
 		&graphic);
 	mlx_hook(graphic.mlx.win, ButtonPress, ButtonPressMask, mouse_handler,
 		&graphic);
+	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
+		&graphic);
+	mlx_loop_hook(graphic.mlx.mlx, key_handler, &graphic);
 	mlx_loop(graphic.mlx.mlx);
 	return (0);
 }

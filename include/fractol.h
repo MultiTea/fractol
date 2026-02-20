@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 18:27:18 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:12:45 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 void		check_param(int argc, char **argv);
 t_mlx_data	init_display(t_mlx_data *graphic);
 int			hsv_to_rgb(double h, double s, double v);
-int			key_handler(int keycode, t_dataset *graphic);
+int			key_handler(t_dataset *graphic);
 int			display_rainbow(t_mlx_data *graphic);
 int			close_hook(t_dataset *graphic);
 void		display_pixel(t_mlx_img *data, int x, int y, int color);
@@ -43,5 +43,7 @@ int			render_fract(t_dataset *fract);
 void		julia_set(t_dataset *julia, int x, int y);
 void		mandelbrot_set(t_dataset *mdb, int x, int y);
 int			mouse_handler(int button, int x, int y, t_dataset *graphic);
+int			key_pressed(int keycode, t_dataset *graphic);
+int			key_released(int keycode, t_dataset *graphic);
 
 #endif

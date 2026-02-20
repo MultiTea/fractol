@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/19 13:09:01 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/20 13:52:07 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_DIR		:= src
 SRCS		:= main.c \
 	controls/handlers.c \
 	controls/hooks.c \
+	controls/keys.c \
 	colors/hsv_to_rgb.c \
 	display/display.c \
 	display/init_display.c \
@@ -46,7 +47,7 @@ DEPS		:= $(OBJS:.o=.d)
 
 #FLAGS
 CC 			:= cc
-CCFLAGS 	:= -Wall -Wextra -Werror
+CCFLAGS 	:= -Wall -Wextra -Werror -O3
 AR 			:= ar
 ARFLAGS		:= rcs
 LDFLAGS     := $(addprefix -L,$(dir $(LIBS_TARGET)) $(dir $(LIB_MLX_TARGET)) /usr/lib)

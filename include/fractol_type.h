@@ -6,13 +6,14 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 13:03:14 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:52:47 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_TYPE_H
 # define FRACTOL_TYPE_H
 
+// MINILIBX
 typedef struct s_mlx_img
 {
 	void			*img;
@@ -29,18 +30,7 @@ typedef struct s_mlx_data
 	t_mlx_img		frame;
 }					t_mlx_data;
 
-typedef struct s_resolution
-{
-	int				width;
-	int				height;
-}					t_resolution;
-
-typedef struct s_complex
-{
-	double			x;
-	double			y;
-}					t_complex;
-
+// HSV COLOR
 typedef struct s_rgb
 {
 	int				r;
@@ -55,11 +45,27 @@ typedef struct s_hsv
 	double			v;
 }					t_hsv;
 
+// HOOKS
+typedef struct s_keys
+{
+	int				up;
+	int				down;
+	int				left;
+	int				right;
+}					t_keys;
+
+// FRACTAL
 typedef enum e_fractal_type
 {
 	MANDELBROT,
 	JULIA,
 }					t_fractal_type;
+
+typedef struct s_complex
+{
+	double			x;
+	double			y;
+}					t_complex;
 
 typedef struct s_fract
 {
@@ -73,11 +79,12 @@ typedef struct s_fract
 	int				max_i;
 }					t_fract;
 
+// MOTHERSHIP
 typedef struct s_dataset
 {
 	t_mlx_data		mlx;
-	t_resolution	res;
 	t_fract			fract;
+	t_keys			k;
 }					t_dataset;
 
 #endif
