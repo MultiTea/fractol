@@ -1,16 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handlers.c                                         :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 13:31:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 17:09:10 by lbolea           ###   ########.fr       */
+/*   Created: 2026/02/20 13:25:59 by lbolea            #+#    #+#             */
+/*   Updated: 2026/02/20 18:34:40 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fractol.h"
+#include "../include/fractol.h"
+
+int	key_pressed(int keycode, t_dataset *graphic)
+{
+	if (keycode == ESC)
+	{
+		close_hook(graphic);
+		exit(EXIT_SUCCESS);
+	}
+	else if (keycode == ARR_UP)
+		graphic->k.up = 1;
+	else if (keycode == ARR_DOWN)
+		graphic->k.down = 1;
+	else if (keycode == ARR_R)
+		graphic->k.right = 1;
+	else if (keycode == ARR_L)
+		graphic->k.left = 1;
+	return (0);
+}
+
+int	key_released(int keycode, t_dataset *graphic)
+{
+	if (keycode == ARR_UP)
+		graphic->k.up = 0;
+	else if (keycode == ARR_DOWN)
+		graphic->k.down = 0;
+	else if (keycode == ARR_R)
+		graphic->k.right = 0;
+	else if (keycode == ARR_L)
+		graphic->k.left = 0;
+	return (0);
+}
 
 int	key_handler(t_dataset *graphic)
 {
@@ -38,8 +69,6 @@ int	key_handler(t_dataset *graphic)
 		graphic->fract.max_x -= shift;
 	}
 	render_fract(graphic);
-	mlx_put_image_to_window(graphic->mlx.mlx, graphic->mlx.win,
-		graphic->mlx.frame.img, 0, 0);
 	return (0);
 }
 

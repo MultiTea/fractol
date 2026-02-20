@@ -6,11 +6,11 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:39:55 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/19 01:42:57 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 17:28:58 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fractol.h"
+#include "../include/fractol.h"
 
 void	check_param(int argc, char **argv)
 {

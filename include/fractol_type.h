@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 16:52:47 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 17:53:18 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,6 @@ typedef struct s_mlx_data
 	void			*win;
 	t_mlx_img		frame;
 }					t_mlx_data;
-
-// HSV COLOR
-typedef struct s_rgb
-{
-	int				r;
-	int				g;
-	int				b;
-}					t_rgb;
-
-typedef struct s_hsv
-{
-	double			h;
-	double			s;
-	double			v;
-}					t_hsv;
 
 // HOOKS
 typedef struct s_keys

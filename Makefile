@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/20 13:52:07 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/20 18:35:43 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,12 @@ NAME		:= fractol
 #SOURCES
 SRC_DIR		:= src
 SRCS		:= main.c \
-	controls/handlers.c \
-	controls/hooks.c \
-	controls/keys.c \
-	colors/hsv_to_rgb.c \
-	display/display.c \
-	display/init_display.c \
-	parsing/parsing.c \
-	renders/renders_utils.c \
-	renders/mandelbrot.c \
-	renders/julia.c
+	hooks.c \
+	keys.c \
+	hsv_to_rgb.c \
+	parsing.c \
+	renders_utils.c \
+	fractal_set.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 
 #INCLUDES

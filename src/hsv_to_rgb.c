@@ -6,57 +6,34 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:28:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/18 21:51:49 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 18:34:40 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fractol.h"
-
-static t_rgb	set_rgb(int r, int g, int b)
-{
-	t_rgb	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
-}
-
-static t_rgb	find_neighbouring(t_hsv hsv, int c)
-{
-	double	f;
-	int		p;
-	int		q;
-	int		t;
-
-	f = (hsv.h / 60.0) - c;
-	p = (hsv.v * (1 - hsv.s) * 255);
-	q = (hsv.v * (1 - f * hsv.s) * 255);
-	t = (hsv.v * (1 - (1 - f) * hsv.s) * 255);
-	hsv.v *= 255;
-	if (c == 0)
-		return (set_rgb(hsv.v, t, p));
-	if (c == 1)
-		return (set_rgb(q, hsv.v, p));
-	if (c == 2)
-		return (set_rgb(p, hsv.v, t));
-	if (c == 3)
-		return (set_rgb(p, q, hsv.v));
-	if (c == 4)
-		return (set_rgb(t, p, hsv.v));
-	return (set_rgb(hsv.v, p, q));
-}
+#include "../include/fractol.h"
 
 int	hsv_to_rgb(double h, double s, double v)
 {
-	int		chroma;
-	t_rgb	color;
-	t_hsv	hsv;
+	int		c;
+	double	f;
+	int		q;
+	int		t;
 
-	hsv.h = h;
-	hsv.s = s;
-	hsv.v = v;
-	chroma = (int)(h / 60.0) % 6;
-	color = find_neighbouring(hsv, chroma);
-	return ((color.r << 16) | (color.g << 8) | color.b);
+	(void)s;
+	(void)v;
+	c = (int)(h / 60.0) % 6;
+	f = (h / 60.0) - c;
+	q = (1.0 - f) * 255.0;
+	t = f * 255.0;
+	if (c == 0)
+		return ((225 << 16) | (t << 8) | 0);
+	if (c == 1)
+		return ((q << 16) | (255 << 8) | 0);
+	if (c == 2)
+		return ((0 << 16) | (255 << 8) | t);
+	if (c == 3)
+		return ((0 << 16) | (q << 8) | 255);
+	if (c == 4)
+		return ((t << 16) | (0 << 8) | 255);
+	return ((225 << 16) | (0 << 8) | q);
 }

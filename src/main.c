@@ -6,11 +6,24 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 16:50:57 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/20 18:30:20 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
+
+void	loop(t_dataset graphic)
+{
+	mlx_hook(graphic.mlx.win, KeyPress, KeyPressMask, key_pressed, &graphic);
+	mlx_hook(graphic.mlx.win, KeyRelease, KeyReleaseMask, key_released,
+		&graphic);
+	mlx_hook(graphic.mlx.win, ButtonPress, ButtonPressMask, mouse_handler,
+		&graphic);
+	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
+		&graphic);
+	mlx_loop_hook(graphic.mlx.mlx, key_handler, &graphic);
+	mlx_loop(graphic.mlx.mlx);
+}
 
 int	main(int argc, char **argv)
 {
@@ -25,16 +38,6 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error"));
 	init_display(&graphic.mlx);
 	render_fract(&graphic);
-	mlx_put_image_to_window(graphic.mlx.mlx, graphic.mlx.win,
-		graphic.mlx.frame.img, 0, 0);
-	mlx_hook(graphic.mlx.win, KeyPress, KeyPressMask, key_pressed, &graphic);
-	mlx_hook(graphic.mlx.win, KeyRelease, KeyReleaseMask, key_released,
-		&graphic);
-	mlx_hook(graphic.mlx.win, ButtonPress, ButtonPressMask, mouse_handler,
-		&graphic);
-	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
-		&graphic);
-	mlx_loop_hook(graphic.mlx.mlx, key_handler, &graphic);
-	mlx_loop(graphic.mlx.mlx);
+	loop(graphic);
 	return (0);
 }
