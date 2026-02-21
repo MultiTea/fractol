@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:25:59 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 18:34:40 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 00:45:59 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,26 @@ int	key_handler(t_dataset *graphic)
 {
 	double	shift;
 
-	shift = (graphic->fract.max_x - graphic->fract.min_x) * 0.1;
+	shift = (graphic->fract.x.max - graphic->fract.x.min) * 0.005;
 	if (graphic->k.up)
 	{
-		graphic->fract.min_y -= shift;
-		graphic->fract.max_y -= shift;
+		graphic->fract.y.min -= shift;
+		graphic->fract.y.max -= shift;
 	}
 	else if (graphic->k.down)
 	{
-		graphic->fract.min_y += shift;
-		graphic->fract.max_y += shift;
+		graphic->fract.y.min += shift;
+		graphic->fract.y.max += shift;
 	}
 	else if (graphic->k.right)
 	{
-		graphic->fract.min_x += shift;
-		graphic->fract.max_x += shift;
+		graphic->fract.x.min += shift;
+		graphic->fract.x.max += shift;
 	}
 	else if (graphic->k.left)
 	{
-		graphic->fract.min_x -= shift;
-		graphic->fract.max_x -= shift;
+		graphic->fract.x.min -= shift;
+		graphic->fract.x.max -= shift;
 	}
 	render_fract(graphic);
 	return (0);
@@ -80,16 +80,16 @@ static void	zoom_handler(t_dataset *graphic, double mouse_reel,
 	double	new_width;
 	double	new_height;
 
-	curr_width = graphic->fract.max_x - graphic->fract.min_x;
-	curr_height = graphic->fract.max_y - graphic->fract.min_y;
+	curr_width = graphic->fract.x.max - graphic->fract.x.min;
+	curr_height = graphic->fract.y.max - graphic->fract.y.min;
 	new_width = curr_width * zoom_ratio;
 	new_height = curr_height * zoom_ratio;
-	graphic->fract.min_x = mouse_reel - (mouse_reel - graphic->fract.min_x)
+	graphic->fract.x.min = mouse_reel - (mouse_reel - graphic->fract.x.min)
 		* zoom_ratio;
-	graphic->fract.max_x = graphic->fract.min_x + new_width;
-	graphic->fract.min_y = mouse_img - (mouse_img - graphic->fract.min_y)
+	graphic->fract.x.max = graphic->fract.x.min + new_width;
+	graphic->fract.y.min = mouse_img - (mouse_img - graphic->fract.y.min)
 		* zoom_ratio;
-	graphic->fract.max_y = graphic->fract.min_y + new_height;
+	graphic->fract.y.max = graphic->fract.y.min + new_height;
 }
 
 int	mouse_handler(int button, int x, int y, t_dataset *graphic)
@@ -100,10 +100,10 @@ int	mouse_handler(int button, int x, int y, t_dataset *graphic)
 
 	if (button == 4 || button == 5)
 	{
-		mouse_reel = graphic->fract.min_x + (double)x * (graphic->fract.max_x
-				- graphic->fract.min_x) / W;
-		mouse_img = graphic->fract.min_y + (double)y * (graphic->fract.max_y
-				- graphic->fract.min_y) / H;
+		mouse_reel = graphic->fract.x.min + (double)x * (graphic->fract.x.max
+				- graphic->fract.x.min) / W;
+		mouse_img = graphic->fract.y.max - (double)y * (graphic->fract.y.max
+				- graphic->fract.y.min) / H;
 		if (button == 4)
 			zoom_ratio = 0.90;
 		else

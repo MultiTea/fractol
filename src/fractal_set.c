@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:26:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 20:42:56 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 00:37:54 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,135 +18,122 @@ static double	map(double unscaled_num, double map_min, double map_max,
 	return ((map_max - map_min) * (unscaled_num / old_max) + map_min);
 }
 
-void	multibrot_set(t_dataset *mdb, t_pos p)
+static void	init_mandelbrot_args(t_dataset *mdb, double *x2, double *y2)
 {
-	int			i;
-	t_complex	z;
-	t_complex	c;
-	double		x2;
-	double		y2;
-	double		xtemp;
-	double		xold;
-	double		yold;
-	int			period;
-
-	i = 0;
-	c.x = map((double)p.x, mdb->fract.min_x, mdb->fract.max_x, (double)W);
-	c.y = map((double)p.y, mdb->fract.min_y, mdb->fract.max_y, (double)H);
-	z.x = 0;
-	z.y = 0;
-	x2 = 0;
-	y2 = 0;
-	xold = 0;
-	yold = 0;
-	period = 0;
-	while ((x2 + y2) <= 4.0 && i < mdb->fract.max_i)
+	if (mdb->fract.type == MANDELBROT)
 	{
-		xtemp = (x2 * x2) - (6.0 * x2 * y2) + (y2 * y2) + c.x;
-		z.y = (4.0 * z.x * z.x * z.x * z.y) - (4.0 * z.x * z.y * z.y * z.y)
-			+ c.y;
-		z.x = xtemp;
-		x2 = z.x * z.x;
-		y2 = z.y * z.y;
-		i++;
-		if (z.x == xold && z.y == yold)
-		{
-			i = mdb->fract.max_i;
-			break ;
-		}
-		period++;
-		if (period > 20)
-		{
-			period = 0;
-			xold = z.x;
-			yold = z.y;
-		}
+		mdb->c.x = map((double)mdb->p.x, mdb->fract.x.min, mdb->fract.x.max,
+				(double)W) - 0.5;
 	}
-	display_fract(mdb, z, p, i);
+	else
+		mdb->c.x = map((double)mdb->p.x, mdb->fract.x.min, mdb->fract.x.max,
+				(double)W);
+	mdb->c.y = map((double)mdb->p.y, mdb->fract.y.max, mdb->fract.y.min,
+			(double)H);
+	mdb->z.x = 0.0;
+	mdb->z.y = 0.0;
+	*x2 = 0;
+	*y2 = 0;
 }
 
-void	mandelbrot_set(t_dataset *mdb, t_pos p)
+void	mandelbrot_set(t_dataset *mdb, double x2, double y2)
 {
-	int			i;
-	t_complex	z;
-	t_complex	c;
-	double		x2;
-	double		y2;
-	double		xold;
-	double		yold;
-	int			period;
-
-	i = 0;
-	c.x = map((double)p.x, mdb->fract.min_x, mdb->fract.max_x, (double)W) - 0.5;
-	c.y = map((double)p.y, mdb->fract.min_y, mdb->fract.max_y, (double)H);
-	z.x = 0;
-	z.y = 0;
-	x2 = 0;
-	y2 = 0;
-	xold = 0;
-	yold = 0;
-	period = 0;
-	while ((x2 + y2) <= 4.0 && i < mdb->fract.max_i)
+	mdb->fract.i = 0;
+	mdb->fract.mb.old_x = 0;
+	mdb->fract.mb.old_y = 0;
+	mdb->fract.mb.period = 0;
+	init_mandelbrot_args(mdb, &x2, &y2);
+	while ((x2 + y2) <= 4.0 && mdb->fract.i < mdb->fract.max_i)
 	{
-		z.y = 2.0 * z.x * z.y + c.y;
-		z.x = x2 - y2 + c.x;
-		x2 = z.x * z.x;
-		y2 = z.y * z.y;
-		i++;
-		if (z.x == xold && z.y == yold)
+		mdb->z.y = 2.0 * mdb->z.x * mdb->z.y + mdb->c.y;
+		mdb->z.x = x2 - y2 + mdb->c.x;
+		x2 = mdb->z.x * mdb->z.x;
+		y2 = mdb->z.y * mdb->z.y;
+		mdb->fract.i++;
+		if (mdb->z.x == mdb->fract.mb.old_x && mdb->z.y == mdb->fract.mb.old_y)
+			mdb->fract.i = mdb->fract.max_i;
+		if (++mdb->fract.mb.period > 20)
 		{
-			i = mdb->fract.max_i;
-			break ;
-		}
-		period++;
-		if (period > 20)
-		{
-			period = 0;
-			xold = z.x;
-			yold = z.y;
+			mdb->fract.mb.period = 0;
+			mdb->fract.mb.old_x = mdb->z.x;
+			mdb->fract.mb.old_y = mdb->z.y;
 		}
 	}
-	display_fract(mdb, z, p, i);
+	display_fract(mdb, mdb->fract.i);
 }
 
-void	julia_set(t_dataset *julia, t_pos p)
+void	multibrot_set(t_dataset *mdb, double x2, double y2)
 {
-	int			i;
-	double		tmp;
-	t_complex	z;
-	t_complex	c;
+	double	tmp_x;
 
-	i = 0;
-	z.x = map((double)p.x, julia->fract.min_x, julia->fract.max_x, (double)W);
-	z.y = map((double)p.y, julia->fract.min_y, julia->fract.max_y, (double)H);
-	c.x = julia->fract.julia_x;
-	c.y = julia->fract.julia_y;
-	while (i < julia->fract.max_i)
+	mdb->fract.i = 0;
+	mdb->fract.mb.old_x = 0;
+	mdb->fract.mb.old_y = 0;
+	mdb->fract.mb.period = 0;
+	init_mandelbrot_args(mdb, &x2, &y2);
+	while ((x2 + y2) <= 4.0 && mdb->fract.i < mdb->fract.max_i)
 	{
-		if ((z.x * z.x + z.y * z.y) > 4.0)
-			break ;
-		tmp = (z.x * z.x) - (z.y * z.y);
-		z.y = 2 * z.x * z.y + c.y;
-		z.x = tmp + c.x;
-		i++;
+		tmp_x = (x2 * x2) - (6.0 * x2 * y2) + (y2 * y2) + mdb->c.x;
+		mdb->z.y = 4.0 * mdb->z.x * mdb->z.y * (x2 - y2) + mdb->c.y;
+		mdb->z.x = tmp_x;
+		x2 = mdb->z.x * mdb->z.x;
+		y2 = mdb->z.y * mdb->z.y;
+		mdb->fract.i++;
+		if (mdb->z.x == mdb->fract.mb.old_x && mdb->z.y == mdb->fract.mb.old_y)
+			mdb->fract.i = mdb->fract.max_i;
+		if (++mdb->fract.mb.period > 20)
+		{
+			mdb->fract.mb.period = 0;
+			mdb->fract.mb.old_x = mdb->z.x;
+			mdb->fract.mb.old_y = mdb->z.y;
+		}
 	}
-	display_fract(julia, z, p, i);
+	display_fract(mdb, mdb->fract.i);
 }
 
-void	display_fract(t_dataset *fract, t_complex z, t_pos p, int i)
+void	julia_set(t_dataset *julia)
+{
+	double	tmp;
+
+	julia->fract.i = 0;
+	julia->z.x = map((double)julia->p.x, julia->fract.x.min, julia->fract.x.max,
+			(double)W);
+	julia->z.y = map((double)julia->p.y, julia->fract.y.max, julia->fract.y.min,
+			(double)H);
+	julia->c.x = julia->fract.j.reel;
+	julia->c.y = julia->fract.j.img;
+	while (julia->fract.i < julia->fract.max_i)
+	{
+		if ((julia->z.x * julia->z.x + julia->z.y * julia->z.y) > 4.0)
+			break ;
+		tmp = (julia->z.x * julia->z.x) - (julia->z.y * julia->z.y);
+		julia->z.y = 2 * julia->z.x * julia->z.y + julia->c.y;
+		julia->z.x = tmp + julia->c.x;
+		julia->fract.i++;
+	}
+	display_fract(julia, julia->fract.i);
+}
+
+void	display_fract(t_dataset *fract, int i)
 {
 	int		color;
 	double	zn;
 	double	nu;
+	int		gradient;
 
-	(void)z;
 	if (i == fract->fract.max_i)
-		display_pixel(&fract->mlx.frame, p.x, p.y, 0x000000);
+		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, 0x000000);
 	else
 	{
-		zn = z.x * z.x + z.y * z.y;
+		zn = fract->z.x * fract->z.x + fract->z.y * fract->z.y;
 		nu = log2(log2(zn));
-		color = hsv_to_rgb((i + 1 - nu) * 5, 1, 1);
-		display_pixel(&fract->mlx.frame, p.x, p.y, color);
+		gradient = i + 1 - nu;
+		color = 0;
+		fract->max_ite = 360;
+		if (fract->anim == STATIC)
+			color = hsv_to_rgb(gradient, 1, 1);
+		else if (fract->anim == ANIMATED)
+			color = hsv_animate(fract, gradient * fract->ite);
+		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, color);
 	}
 }

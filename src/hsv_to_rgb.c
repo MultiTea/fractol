@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:28:27 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 18:34:40 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/21 23:22:03 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,16 @@ int	hsv_to_rgb(double h, double s, double v)
 	if (c == 4)
 		return ((t << 16) | (0 << 8) | 255);
 	return ((225 << 16) | (0 << 8) | q);
+}
+
+int	hsv_animate(t_dataset *fract, int n)
+{
+	double	hue;
+	double	factor;
+
+	if (n == fract->max_ite)
+		return (0x000000);
+	factor = 15.0;
+	hue = ((double)(n * n) / factor) + (double)fract->ite;
+	return (hsv_to_rgb(hue, 1.0, 1.0));
 }

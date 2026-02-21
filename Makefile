@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/20 18:40:07 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/21 20:50:47 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		:= fractol
 #SOURCES
 SRC_DIR		:= src
 SRCS		:= main.c \
+	controls.c \
 	hooks.c \
-	keys.c \
 	hsv_to_rgb.c \
 	parsing.c \
 	renders_utils.c \

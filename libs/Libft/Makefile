@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/13 09:22:37 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/21 16:35:49 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ AR = ar
 CFLAGS = -Wall -Wextra -Werror
 FILES.H = libft.h
 SRCS = 	ft_atoi.c \
+		ft_atof.c \
 		ft_bzero.c \
 		ft_calloc.c \
 		ft_isalnum.c \

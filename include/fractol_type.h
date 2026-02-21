@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/20 20:39:06 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/21 22:53:08 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,48 @@ typedef struct s_complex
 	double			y;
 }					t_complex;
 
+typedef struct s_min_max
+{
+	double			min;
+	double			max;
+}					t_min_max;
+
 typedef struct s_pos
 {
 	int				x;
 	int				y;
 }					t_pos;
 
+typedef struct s_mandel
+{
+	double			old_x;
+	double			old_y;
+	int				period;
+}					t_mandel;
+
+typedef struct s_julia
+{
+	double			reel;
+	double			img;
+}					t_julia;
+
 typedef struct s_fract
 {
 	t_fractal_type	type;
-	double			min_x;
-	double			max_x;
-	double			min_y;
-	double			max_y;
-	double			julia_x;
-	double			julia_y;
+	int				i;
 	int				max_i;
+	t_mandel		mb;
+	t_min_max		x;
+	t_min_max		y;
+	t_julia			j;
+
 }					t_fract;
+
+typedef enum e_color
+{
+	STATIC,
+	ANIMATED,
+}					t_color;
 
 // MOTHERSHIP
 typedef struct s_dataset
@@ -77,6 +102,12 @@ typedef struct s_dataset
 	t_mlx_data		mlx;
 	t_fract			fract;
 	t_keys			k;
+	t_complex		z;
+	t_complex		c;
+	t_pos			p;
+	t_color			anim;
+	int				ite;
+	int				max_ite;
 }					t_dataset;
 
 #endif
