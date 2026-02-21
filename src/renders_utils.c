@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:49:08 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 00:46:28 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 00:53:53 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	fract_init(t_dataset *data)
 	data->fract.max_i = 10000;
 	data->ite = 0;
 	data->max_ite = 0;
-	data->fract.y.min = -2.0;
-	data->fract.y.max = 2.0;
-	data->fract.x.min = -2.0 * ratio;
-	data->fract.x.max = 2.0 * ratio;
+	data->fract.y.min = -1.5;
+	data->fract.y.max = 1.5;
+	data->fract.x.min = -1.5 * ratio;
+	data->fract.x.max = 1.5 * ratio;
 	data->fract.j.reel = 0;
 	data->fract.j.img = 0;
 	data->k.up = 0;
@@ -48,6 +48,30 @@ void	display_pixel(t_mlx_img *data, int x, int y, int color)
 		return ;
 	dst = data->addr + (y * data->line_len + x * 4);
 	*(unsigned int *)dst = color;
+}
+
+void	display_fract(t_dataset *fract, int i)
+{
+	int		color;
+	double	zn;
+	double	nu;
+	int		gradient;
+
+	if (i == fract->fract.max_i)
+		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, 0x000000);
+	else
+	{
+		zn = fract->z.x * fract->z.x + fract->z.y * fract->z.y;
+		nu = log2(log2(zn));
+		gradient = i + 1 - nu;
+		color = 0;
+		fract->max_ite = 360;
+		if (fract->anim == STATIC)
+			color = hsv_to_rgb(gradient, 1, 1);
+		else if (fract->anim == ANIMATED)
+			color = hsv_animate(fract, gradient * fract->ite);
+		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, color);
+	}
 }
 
 int	render_fract(t_dataset *fract)

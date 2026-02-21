@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:26:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 00:37:54 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 00:49:27 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,28 +112,4 @@ void	julia_set(t_dataset *julia)
 		julia->fract.i++;
 	}
 	display_fract(julia, julia->fract.i);
-}
-
-void	display_fract(t_dataset *fract, int i)
-{
-	int		color;
-	double	zn;
-	double	nu;
-	int		gradient;
-
-	if (i == fract->fract.max_i)
-		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, 0x000000);
-	else
-	{
-		zn = fract->z.x * fract->z.x + fract->z.y * fract->z.y;
-		nu = log2(log2(zn));
-		gradient = i + 1 - nu;
-		color = 0;
-		fract->max_ite = 360;
-		if (fract->anim == STATIC)
-			color = hsv_to_rgb(gradient, 1, 1);
-		else if (fract->anim == ANIMATED)
-			color = hsv_animate(fract, gradient * fract->ite);
-		display_pixel(&fract->mlx.frame, fract->p.x, fract->p.y, color);
-	}
 }
