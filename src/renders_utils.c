@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:49:08 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 00:53:53 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 15:29:17 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	fract_init(t_dataset *data)
 	data->c.y = 0;
 	data->p.x = 0;
 	data->p.y = 0;
-	data->fract.mb.old_x = 0;
-	data->fract.mb.old_y = 0;
-	data->fract.mb.period = 0;
+	data->fract.mb.dx = 0;
+	data->fract.mb.dy = 0;
+	data->is_rendered = 0;
 }
 
 void	display_pixel(t_mlx_img *data, int x, int y, int color)

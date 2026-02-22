@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:26:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 00:49:27 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 15:55:44 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void	init_mandelbrot_args(t_dataset *mdb, double *x2, double *y2)
 	mdb->z.y = 0.0;
 	*x2 = 0;
 	*y2 = 0;
-}
-
-void	mandelbrot_set(t_dataset *mdb, double x2, double y2)
-{
 	mdb->fract.i = 0;
 	mdb->fract.mb.old_x = 0;
 	mdb->fract.mb.old_y = 0;
 	mdb->fract.mb.period = 0;
+}
+
+void	mandelbrot_set(t_dataset *mdb, double x2, double y2)
+{
 	init_mandelbrot_args(mdb, &x2, &y2);
 	while ((x2 + y2) <= 4.0 && mdb->fract.i < mdb->fract.max_i)
 	{
@@ -50,9 +50,12 @@ void	mandelbrot_set(t_dataset *mdb, double x2, double y2)
 		x2 = mdb->z.x * mdb->z.x;
 		y2 = mdb->z.y * mdb->z.y;
 		mdb->fract.i++;
-		if (mdb->z.x == mdb->fract.mb.old_x && mdb->z.y == mdb->fract.mb.old_y)
+		mdb->fract.mb.dx = mdb->z.x - mdb->fract.mb.old_x;
+		mdb->fract.mb.dy = mdb->z.y - mdb->fract.mb.old_y;
+		if (mdb->fract.mb.dx * mdb->fract.mb.dx + mdb->fract.mb.dy
+			* mdb->fract.mb.dy < __DBL_EPSILON__)
 			mdb->fract.i = mdb->fract.max_i;
-		if (++mdb->fract.mb.period > 20)
+		if (++mdb->fract.mb.period > 120)
 		{
 			mdb->fract.mb.period = 0;
 			mdb->fract.mb.old_x = mdb->z.x;
@@ -66,10 +69,6 @@ void	multibrot_set(t_dataset *mdb, double x2, double y2)
 {
 	double	tmp_x;
 
-	mdb->fract.i = 0;
-	mdb->fract.mb.old_x = 0;
-	mdb->fract.mb.old_y = 0;
-	mdb->fract.mb.period = 0;
 	init_mandelbrot_args(mdb, &x2, &y2);
 	while ((x2 + y2) <= 4.0 && mdb->fract.i < mdb->fract.max_i)
 	{
@@ -79,9 +78,12 @@ void	multibrot_set(t_dataset *mdb, double x2, double y2)
 		x2 = mdb->z.x * mdb->z.x;
 		y2 = mdb->z.y * mdb->z.y;
 		mdb->fract.i++;
-		if (mdb->z.x == mdb->fract.mb.old_x && mdb->z.y == mdb->fract.mb.old_y)
+		mdb->fract.mb.dx = mdb->z.x - mdb->fract.mb.old_x;
+		mdb->fract.mb.dy = mdb->z.y - mdb->fract.mb.old_y;
+		if (mdb->fract.mb.dx * mdb->fract.mb.dx + mdb->fract.mb.dy
+			* mdb->fract.mb.dy < __DBL_EPSILON__)
 			mdb->fract.i = mdb->fract.max_i;
-		if (++mdb->fract.mb.period > 20)
+		if (++mdb->fract.mb.period > 120)
 		{
 			mdb->fract.mb.period = 0;
 			mdb->fract.mb.old_x = mdb->z.x;

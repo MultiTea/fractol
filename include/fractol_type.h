@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/21 22:53:08 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 15:01:44 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_mandel
 {
 	double			old_x;
 	double			old_y;
+	double			dx;
+	double			dy;
 	int				period;
 }					t_mandel;
 
@@ -108,6 +110,7 @@ typedef struct s_dataset
 	t_color			anim;
 	int				ite;
 	int				max_ite;
+	int				is_rendered;
 }					t_dataset;
 
 #endif

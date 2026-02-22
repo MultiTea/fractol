@@ -6,11 +6,22 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/21 22:48:48 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 14:41:01 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
+
+static int	frame_check(t_dataset *graphic)
+{
+	key_handler(graphic);
+	if (graphic->anim == ANIMATED || !graphic->is_rendered)
+	{
+		render_fract(graphic);
+		graphic->is_rendered = 1;
+	}
+	return (0);
+}
 
 static void	loop(t_dataset graphic)
 {
@@ -21,7 +32,7 @@ static void	loop(t_dataset graphic)
 		&graphic);
 	mlx_hook(graphic.mlx.win, DestroyNotify, NoEventMask, &close_hook,
 		&graphic);
-	mlx_loop_hook(graphic.mlx.mlx, key_handler, &graphic);
+	mlx_loop_hook(graphic.mlx.mlx, frame_check, &graphic);
 	mlx_loop(graphic.mlx.mlx);
 }
 
@@ -32,7 +43,13 @@ int	main(int argc, char **argv)
 	fract_init(&graphic);
 	parsing(argc, argv, &graphic);
 	init_display(&graphic.mlx);
-	render_fract(&graphic);
+	if (!graphic.is_rendered)
+	{
+		render_fract(&graphic);
+		graphic.is_rendered = 1;
+	}
+	// printf("%lf\n", graphic.c.x);
+	// printf("%lf\n", graphic.c.y);
 	loop(graphic);
 	return (0);
 }

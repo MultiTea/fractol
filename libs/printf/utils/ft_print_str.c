@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:34:04 by lbolea            #+#    #+#             */
-/*   Updated: 2025/12/15 15:11:52 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 15:37:29 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	ft_print_str(char *str)
 {
+	ssize_t	err;
+
 	if (!str)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		err = write(1, "(null)", 6);
+		return ((int)err);
 	}
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));

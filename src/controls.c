@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:25:59 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 00:45:59 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 15:22:59 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	key_handler(t_dataset *graphic)
 	shift = (graphic->fract.x.max - graphic->fract.x.min) * 0.005;
 	if (graphic->k.up)
 	{
-		graphic->fract.y.min -= shift;
-		graphic->fract.y.max -= shift;
+		graphic->fract.y.min += shift;
+		graphic->fract.y.max += shift;
 	}
 	else if (graphic->k.down)
 	{
-		graphic->fract.y.min += shift;
-		graphic->fract.y.max += shift;
+		graphic->fract.y.min -= shift;
+		graphic->fract.y.max -= shift;
 	}
 	else if (graphic->k.right)
 	{
@@ -68,7 +68,7 @@ int	key_handler(t_dataset *graphic)
 		graphic->fract.x.min -= shift;
 		graphic->fract.x.max -= shift;
 	}
-	render_fract(graphic);
+	graphic->is_rendered = 0;
 	return (0);
 }
 
@@ -110,5 +110,6 @@ int	mouse_handler(int button, int x, int y, t_dataset *graphic)
 			zoom_ratio = 1.10;
 		zoom_handler(graphic, mouse_reel, mouse_img, zoom_ratio);
 	}
+	graphic->is_rendered = 0;
 	return (0);
 }
