@@ -1,8 +1,0 @@
-*.out
-*.o
-*.d
-fractol
-.build
-debug
-*subject.pdf
-*.a
