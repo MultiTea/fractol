@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_const.h                                    :+:      :+:    :+:   */
+/*   fractol_const_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 18:16:05 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 18:37:44 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 20:06:58 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_CONST_H
-# define FRACTOL_CONST_H
+#ifndef FRACTOL_CONST_BONUS_H
+# define FRACTOL_CONST_BONUS_H
 
 # define ERR_X "\033[1;41m ✘ ERROR \033[0m"
 # define ERR_INVALID_NAME "\033[1mPlease enter a correct fractal type : julia, \
