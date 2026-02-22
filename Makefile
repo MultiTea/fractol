@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/21 20:50:47 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/22 18:51:07 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ SRC_DIR		:= src
 SRCS		:= main.c \
 	controls.c \
 	hooks.c \
-	hsv_to_rgb.c \
+	color.c \
 	parsing.c \
-	renders_utils.c \
+	render.c \
 	fractal_set.c
 SRCS 		:= $(SRCS:%=$(SRC_DIR)/%)
 

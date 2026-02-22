@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:43:15 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 15:01:44 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 18:50:54 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_TYPE_H
 
 // MINILIBX
+
 typedef struct s_mlx_img
 {
 	void			*img;
@@ -31,6 +32,7 @@ typedef struct s_mlx_data
 }					t_mlx_data;
 
 // HOOKS
+
 typedef struct s_keys
 {
 	int				up;
@@ -39,31 +41,15 @@ typedef struct s_keys
 	int				right;
 }					t_keys;
 
-// FRACTAL
+/// FRACTAL
+/* Set management */
+
 typedef enum e_fractal_type
 {
 	MANDELBROT,
 	JULIA,
 	MULTIBROT,
 }					t_fractal_type;
-
-typedef struct s_complex
-{
-	double			x;
-	double			y;
-}					t_complex;
-
-typedef struct s_min_max
-{
-	double			min;
-	double			max;
-}					t_min_max;
-
-typedef struct s_pos
-{
-	int				x;
-	int				y;
-}					t_pos;
 
 typedef struct s_mandel
 {
@@ -80,6 +66,36 @@ typedef struct s_julia
 	double			img;
 }					t_julia;
 
+/* Suite operations */
+
+typedef struct s_complex
+{
+	double			x;
+	double			y;
+}					t_complex;
+
+typedef struct s_min_max
+{
+	double			min;
+	double			max;
+}					t_min_max;
+
+/* Display manegement */
+
+typedef struct s_pos
+{
+	int				x;
+	int				y;
+}					t_pos;
+
+typedef enum e_color
+{
+	STATIC,
+	ANIMATED,
+}					t_color;
+
+/// MOTHER OF FRACTAL
+
 typedef struct s_fract
 {
 	t_fractal_type	type;
@@ -92,13 +108,8 @@ typedef struct s_fract
 
 }					t_fract;
 
-typedef enum e_color
-{
-	STATIC,
-	ANIMATED,
-}					t_color;
-
 // MOTHERSHIP
+
 typedef struct s_dataset
 {
 	t_mlx_data		mlx;
