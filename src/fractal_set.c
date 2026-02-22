@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:26:04 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 15:55:44 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 17:52:43 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	mandelbrot_set(t_dataset *mdb, double x2, double y2)
 		if (mdb->fract.mb.dx * mdb->fract.mb.dx + mdb->fract.mb.dy
 			* mdb->fract.mb.dy < __DBL_EPSILON__)
 			mdb->fract.i = mdb->fract.max_i;
-		if (++mdb->fract.mb.period > 120)
+		if (++mdb->fract.mb.period > 143)
 		{
 			mdb->fract.mb.period = 0;
 			mdb->fract.mb.old_x = mdb->z.x;
@@ -83,7 +83,7 @@ void	multibrot_set(t_dataset *mdb, double x2, double y2)
 		if (mdb->fract.mb.dx * mdb->fract.mb.dx + mdb->fract.mb.dy
 			* mdb->fract.mb.dy < __DBL_EPSILON__)
 			mdb->fract.i = mdb->fract.max_i;
-		if (++mdb->fract.mb.period > 120)
+		if (++mdb->fract.mb.period > 143)
 		{
 			mdb->fract.mb.period = 0;
 			mdb->fract.mb.old_x = mdb->z.x;

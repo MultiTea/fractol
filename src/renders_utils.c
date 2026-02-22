@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 12:49:08 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 15:29:17 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 18:38:50 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	fract_init(t_dataset *data)
 	data->fract.max_i = 10000;
 	data->ite = 0;
 	data->max_ite = 0;
-	data->fract.y.min = -1.5;
-	data->fract.y.max = 1.5;
-	data->fract.x.min = -1.5 * ratio;
-	data->fract.x.max = 1.5 * ratio;
+	data->fract.y.min = -1.35;
+	data->fract.y.max = 1.35;
+	data->fract.x.min = -1.35 * ratio;
+	data->fract.x.max = 1.35 * ratio;
 	data->fract.j.reel = 0;
 	data->fract.j.img = 0;
 	data->k.up = 0;

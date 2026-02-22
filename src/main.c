@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 14:48:12 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/22 14:41:01 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 18:38:20 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	main(int argc, char **argv)
 		render_fract(&graphic);
 		graphic.is_rendered = 1;
 	}
-	// printf("%lf\n", graphic.c.x);
-	// printf("%lf\n", graphic.c.y);
 	loop(graphic);
 	return (0);
 }
