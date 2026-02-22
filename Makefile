@@ -6,7 +6,7 @@
 #    By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 15:13:12 by lbolea            #+#    #+#              #
-#    Updated: 2026/02/22 18:51:07 by lbolea           ###   ########.fr        #
+#    Updated: 2026/02/22 19:03:28 by lbolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,14 +98,14 @@ re:
 	@+make --silent --no-print-directory all
 	@echo "$(GREEN)[OK]$(DEF) RECOMPILED $(NAME)"
 
-debug: fclean
-	@$(MAKE) --no-print-directory $(OBJS) $(LIBS_TARGET) CCFLAGS="$(CCFLAGS) -g"
-	@$(MAKE) --no-print-directory $(OBJS) $(LIB_MLX_TARGET) CCFLAGS="$(CCFLAGS) -g"
-	@$(CC) $(CCFLAGS) -g $(LDFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o debug
-	@echo "$(GREEN)[OK]$(DEF) CREATED debug program"
-
-fdebug : clean
-	@rm -rf debug
-	@echo "$(GREEN)[OK]$(DEF) CLEANED debug"
+#debug: fclean
+#	@$(MAKE) --no-print-directory $(OBJS) $(LIBS_TARGET) CCFLAGS="$(CCFLAGS) -g"
+#	@$(MAKE) --no-print-directory $(OBJS) $(LIB_MLX_TARGET) CCFLAGS="$(CCFLAGS) -g"
+#	@$(CC) $(CCFLAGS) -g $(LDFLAGS) $(OBJS) $(LDLIBS) $(LDFLAGS) -o debug
+#	@echo "$(GREEN)[OK]$(DEF) CREATED debug program"
+#
+#fdebug : clean
+#	@rm -rf debug
+#	@echo "$(GREEN)[OK]$(DEF) CLEANED debug"
 
 .PHONY: all clean fclean re
