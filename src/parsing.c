@@ -6,7 +6,7 @@
 /*   By: lbolea <lbolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:39:55 by lbolea            #+#    #+#             */
-/*   Updated: 2026/02/21 23:56:22 by lbolea           ###   ########.fr       */
+/*   Updated: 2026/02/22 22:29:45 by lbolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static void	is_animated(int argc, char **argv, int nb, t_dataset *graphic)
 	{
 		if (!ft_strncmp(argv[nb - 1], "animate", 8))
 			graphic->anim = ANIMATED;
+		else
+			handle_error();
 	}
 	else if (argc == nb - 1)
 		graphic->anim = STATIC;
